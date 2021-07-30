@@ -1,0 +1,49 @@
+{
+  "name": "kosho-coin",
+  "version": "1.0.0",
+  "description": "Kosho Coin",
+  "main": "hardhat.config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/garyb9/Kosho-Coin.git"
+  },
+  "keywords": [],
+  "author": "garyb9",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/garyb9/Kosho-Coin/issues"
+  },
+  "homepage": "https://github.com/garyb9/Kosho-Coin#readme",
+  "dependencies": {
+    "@babel/core": "^7.14.6",
+    "@nomiclabs/buidler": "^1.4.8",
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@openzeppelin/contracts": "^4.1.0",
+    "@openzeppelin/hardhat-upgrades": "^1.9.0",
+    "chai": "^4.3.4",
+    "dotenv": "^10.0.0",
+    "ethereum-waffle": "^3.4.0",
+    "ethers": "^5.4.3",
+    "hardhat": "^2.5.0",
+    "hardhat-deploy": "^0.8.11",
+    "solc": "^0.8.0",
+    "web3": "^1.5.0",
+    "web3-eth-contract": "^1.3.6",
+    "web3-utils": "^1.3.6"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "chai": "^4.3.4",
+    "ethereum-waffle": "^3.4.0",
+    "ethers": "^5.4.0",
+    "web3": "^1.5.0"
+  }
+}
