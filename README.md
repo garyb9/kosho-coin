@@ -1,4 +1,4 @@
 # Kosho-Coin
 Kosho Coin pogchamp
 
-![alt text](https://imgur.com/a/ONf9WiF)
+![alt text](https://i.imgur.com/p1LfYHk.jpg)
