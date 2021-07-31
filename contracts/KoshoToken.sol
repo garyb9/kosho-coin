@@ -7,7 +7,7 @@ import "./chainlink/PriceConsumerV3.sol";
 
 
 // inherits from openzeppelin
-contract Kosho is ERC20 {
+contract KoshoToken is ERC20 {
   // Variables
   address public owner; 
 

@@ -7,10 +7,10 @@ const EVM_REVERT = 'VM Exception while processing transaction: revert'
 
 const hre = require("hardhat");
 
-describe("Kosho", function () {
+describe("KoshoToken", function () {
   it("Basic deployment test", async function () {
-    const Kosho = await ethers.getContractFactory("Kosho");
-    const kosho = await Kosho.deploy();
+    const KoshoToken = await ethers.getContractFactory("KoshoToken");
+    const kosho = await KoshoToken.deploy();
     await kosho.deployed();
 
     // expect(await Kosho.greet()).to.equal("Hello, world!");
