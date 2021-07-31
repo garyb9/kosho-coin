@@ -5,23 +5,52 @@ const EVM_REVERT = 'VM Exception while processing transaction: revert'
 // global.artifacts = artifacts;
 // global.web3 = web3;
 
-const hre = require("hardhat");
+const { ethers } = require("hardhat");
 
 describe("KoshoToken", function () {
-  it("Basic deployment test", async function () {
-    const KoshoToken = await ethers.getContractFactory("KoshoToken");
-    const kosho = await KoshoToken.deploy();
+
+  let Token;
+  let kosho;
+  let owner;
+  let addr1;
+  let addr2;
+  let addr3;
+  let totalSupply = 10000000
+
+  beforeEach(async () => {
+    Token = await ethers.getContractFactory("KoshoToken");
+    [owner, addr1, addr2, addr3] = await ethers.getSigners();
+    kosho = await Token.deploy(totalSupply);
     await kosho.deployed();
+  })
 
-    // expect(await Kosho.greet()).to.equal("Hello, world!");
 
-    // const setGreetingTx = await Kosho.setGreeting("Hola, mundo!");
+  // You can nest describe calls to create subsections.
+  describe("Deployment", function () {
 
-    // // wait until the transaction is mined
-    // await setGreetingTx.wait();
+    it("Should set the right owner", async function () {
+      expect(await kosho.owner()).to.equal(owner.address);
+    });
 
-    // expect(await Kosho.greet()).to.equal("Hola, mundo!");
+    it("Check the right name", async function () {
+      expect(await kosho.name()).to.equal('Kosho');
+    });
+
+    it("Check the right symbol", async function () {
+      expect(await kosho.symbol()).to.equal('KOSH');
+    });
+
+    it("Check the right decimals", async function () {
+      expect(await kosho.decimals()).to.equal(18);
+    });
+
+    it("Should assign the total supply of tokens to the owner", async function () {
+      const ownerBalance = await kosho.balanceOf(owner.address);
+      expect(await kosho.totalSupply()).to.equal(ownerBalance);
+      expect(await kosho.totalSupply()).to.equal(totalSupply);
+    });
   });
+
 });
 
 

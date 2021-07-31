@@ -10,7 +10,7 @@ import "./interfaces/IUniswap.sol";
 import "./chainlink/PriceConsumerV3.sol";
 
 
-contract KoshoToken is IERC20, Context, Ownable {
+contract KoshoToken is IERC20, Ownable {
   using SafeMath for uint256;
   using Address for address;
 
@@ -43,8 +43,12 @@ contract KoshoToken is IERC20, Context, Ownable {
   // ----------------------------------------------
   //                  Constructor
   // ----------------------------------------------
-  constructor() {
-    // owner = msg.sender;
+  constructor(uint256 initialAmount) {
+    // _owner = msg.sender;  -> is set by Ownable
+
+    _totalSupply = initialAmount;
+    _balances[msg.sender] = initialAmount;
+    
     // _rOwned[_msgSender()] = _rTotal;
         
     // IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x05fF2B0DB69458A0750badebc4f9e13aDd608C7F);
