@@ -24,6 +24,9 @@ contract KoshoToken is IERC20, Ownable {
   mapping (address => mapping (address => uint256)) private _allowances;
   uint256 private _totalSupply;
 
+  IUniswapV2Router02 public immutable uniswapV2Router;
+  address public immutable uniswapV2Pair;
+
   // ----------------------------------------------
   //                  Events
   // ----------------------------------------------
@@ -51,13 +54,15 @@ contract KoshoToken is IERC20, Ownable {
     
     // _rOwned[_msgSender()] = _rTotal;
         
-    // IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x05fF2B0DB69458A0750badebc4f9e13aDd608C7F);
-    //   // Create a uniswap pair for this new token
-    // uniswapV2Pair = IUniswapV2Factory(_uniswapV2Router.factory())
-    //     .createPair(address(this), _uniswapV2Router.WETH());
+    IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x05fF2B0DB69458A0750badebc4f9e13aDd608C7F);
+    // Create a uniswap pair for this new token
+    uniswapV2Pair = IUniswapV2Factory(
+      _uniswapV2Router.factory()).createPair(address(this), 
+      _uniswapV2Router.WETH()
+    );
 
-    // // set the rest of the contract variables
-    // uniswapV2Router = _uniswapV2Router;
+    // set the rest of the contract variables
+    uniswapV2Router = _uniswapV2Router;
     
     // //exclude owner and this contract from fee
     // _isExcludedFromFee[owner()] = true;
