@@ -26,6 +26,7 @@ contract KoshoToken is IERC20, Ownable {
 
   IUniswapV2Router02 public immutable uniswapV2Router;
   address public immutable uniswapV2Pair;
+  mapping (address => bool) private _isExcludedFromFee;
 
   // ----------------------------------------------
   //                  Events
@@ -50,25 +51,20 @@ contract KoshoToken is IERC20, Ownable {
     // _owner = msg.sender;  -> is set by Ownable
 
     _totalSupply = initialAmount;
-    _balances[msg.sender] = initialAmount;
-    
-    // _rOwned[_msgSender()] = _rTotal;
-        
+    _balances[_msgSender()] = initialAmount;
+
+    // Create a uniswap pair for this new token     
     IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x05fF2B0DB69458A0750badebc4f9e13aDd608C7F);
-    // Create a uniswap pair for this new token
-    uniswapV2Pair = IUniswapV2Factory(
-      _uniswapV2Router.factory()).createPair(address(this), 
-      _uniswapV2Router.WETH()
-    );
+    uniswapV2Pair = IUniswapV2Factory(_uniswapV2Router.factory()).createPair(address(this), _uniswapV2Router.WETH());
 
     // set the rest of the contract variables
     uniswapV2Router = _uniswapV2Router;
     
-    // //exclude owner and this contract from fee
-    // _isExcludedFromFee[owner()] = true;
-    // _isExcludedFromFee[address(this)] = true;
+    //exclude owner and this contract from fee
+    _isExcludedFromFee[owner()] = true;
+    _isExcludedFromFee[address(this)] = true;
     
-    // emit Transfer(address(0), _msgSender(), _tTotal);
+    emit Transfer(address(0), _msgSender(), initialAmount);
   }
 
   // ----------------------------------------------
